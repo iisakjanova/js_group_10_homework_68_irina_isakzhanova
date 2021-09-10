@@ -1,7 +1,7 @@
+import Counter from "./containers/Counter/Counter";
+
 const App = () => (
-    <div className="App">
-      Hello
-    </div>
+    <Counter />
 );
 
 export default App;
