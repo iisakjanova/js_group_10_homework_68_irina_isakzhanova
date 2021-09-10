@@ -1,12 +1,31 @@
 import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from "react-redux";
+import {Backdrop, Button, CircularProgress, makeStyles, Typography} from "@material-ui/core";
 
 import {add, decrease, fetchCounter, increase, saveCounter, subtract} from "../../store/actions";
-import './Counter.css';
+
+const useStyles = makeStyles(theme => ({
+    root: {
+        textAlign: "center",
+    },
+    number: {
+        paddingTop: theme.spacing(3),
+        paddingBottom: theme.spacing(3),
+    },
+    button: {
+        margin: theme.spacing(1),
+    },
+    backdrop: {
+        zIndex: theme.zIndex.drawer + 1,
+        color: '#fff',
+    },
+}));
 
 const Counter = () => {
+    const classes = useStyles();
+
     const dispatch = useDispatch();
-    const counter = useSelector(state => state.counter);
+    const {counter, loading} = useSelector(state => state);
 
     useEffect(() =>{
         dispatch(fetchCounter());
@@ -33,12 +52,15 @@ const Counter = () => {
     };
 
     return (
-        <div className="Counter">
-            <h1>{counter}</h1>
-            <button onClick={handleIncrease}>Increase</button>
-            <button onClick={handleDecrease}>Decrease</button>
-            <button onClick={handleAdd}>Increase by 5</button>
-            <button onClick={handleSubtract}>Decrease by 5</button>
+        <div className={classes.root}>
+            <Backdrop className={classes.backdrop} open={loading}>
+                <CircularProgress color="inherit" />
+            </Backdrop>
+            <Typography variant="h2" className={classes.number}>{counter}</Typography>
+            <Button variant="contained" onClick={handleIncrease} className={classes.button}>Increase</Button>
+            <Button variant="contained" onClick={handleDecrease} className={classes.button}>Decrease</Button>
+            <Button variant="contained" onClick={handleAdd} className={classes.button}>Increase by 5</Button>
+            <Button variant="contained" onClick={handleSubtract} className={classes.button}>Decrease by 5</Button>
         </div>
     );
 };
