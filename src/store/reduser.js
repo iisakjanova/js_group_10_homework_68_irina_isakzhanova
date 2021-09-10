@@ -1,12 +1,16 @@
 import {
     ADD,
     DECREASE,
+    INCREASE,
+    SUBTRACT,
     FETCH_COUNTER_FAILURE,
     FETCH_COUNTER_REQUEST,
     FETCH_COUNTER_SUCCESS,
-    INCREASE,
-    SUBTRACT
-} from "./actions";
+    SAVE_COUNTER_FAILURE,
+    SAVE_COUNTER_REQUEST,
+    SAVE_COUNTER_SUCCESS
+}
+from "./actions";
 
 const initialState = {
     counter: 0,
@@ -28,6 +32,12 @@ const reducer = (state = initialState, action) => {
         case FETCH_COUNTER_SUCCESS:
             return {...state, loading: false, error: null, counter: action.payload};
         case FETCH_COUNTER_FAILURE:
+            return {...state, loading: false, error: action.payload};
+        case SAVE_COUNTER_REQUEST:
+            return {...state, loading: true};
+        case SAVE_COUNTER_SUCCESS:
+            return {...state, loading: false, error: null};
+        case SAVE_COUNTER_FAILURE:
             return {...state, loading: false, error: action.payload};
         default:
             return state;
