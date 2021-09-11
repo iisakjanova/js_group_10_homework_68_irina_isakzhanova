@@ -27,7 +27,7 @@ const Counter = () => {
     const dispatch = useDispatch();
     const {counter, loading} = useSelector(state => state);
 
-    useEffect(() =>{
+    useEffect(() => {
         dispatch(fetchCounter());
     }, [dispatch]);
 

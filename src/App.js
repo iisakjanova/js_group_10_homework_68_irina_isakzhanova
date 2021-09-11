@@ -1,7 +1,9 @@
 import Counter from "./containers/Counter/Counter";
+import ToDo from "./containers/ToDo/ToDo";
 
 const App = () => (
-    <Counter />
+    // <Counter />
+    <ToDo />
 );
 
 export default App;

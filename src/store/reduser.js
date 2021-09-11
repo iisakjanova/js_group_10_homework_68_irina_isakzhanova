@@ -8,13 +8,18 @@ import {
     FETCH_COUNTER_SUCCESS,
     SAVE_COUNTER_FAILURE,
     SAVE_COUNTER_REQUEST,
-    SAVE_COUNTER_SUCCESS
+    SAVE_COUNTER_SUCCESS,
+    GET_TASKS_FAILURE,
+    GET_TASKS_REQUEST,
+    GET_TASKS_SUCCESS,
 }
 from "./actions";
 
 const initialState = {
     counter: 0,
-    loading: false
+    loading: false,
+    tasks: {},
+    currentTask: ''
 };
 
 const reducer = (state = initialState, action) => {
@@ -38,6 +43,12 @@ const reducer = (state = initialState, action) => {
         case SAVE_COUNTER_SUCCESS:
             return {...state, loading: false, error: null};
         case SAVE_COUNTER_FAILURE:
+            return {...state, loading: false, error: action.payload};
+        case GET_TASKS_REQUEST:
+            return {...state, loading: true};
+        case GET_TASKS_SUCCESS:
+            return {...state, loading: false, error: null, tasks: action.payload};
+        case GET_TASKS_FAILURE:
             return {...state, loading: false, error: action.payload};
         default:
             return state;
