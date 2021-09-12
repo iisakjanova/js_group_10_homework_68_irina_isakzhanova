@@ -1,6 +1,6 @@
-import {useEffect} from "react";
+import React, {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {Grid, makeStyles} from "@material-ui/core";
+import {Backdrop, CircularProgress, Grid, makeStyles} from "@material-ui/core";
 
 import Task from "../../components/Task/Task";
 import {getTasks, removeTask, setTaskDone} from "../../store/actions";
@@ -10,6 +10,10 @@ const useStyles = makeStyles(theme => ({
     root: {
         padding: theme.spacing(4),
     },
+    backdrop: {
+        zIndex: theme.zIndex.drawer + 1,
+        color: '#fff',
+    },
 }));
 
 const ToDo = () => {
@@ -17,6 +21,7 @@ const ToDo = () => {
 
     const dispatch = useDispatch();
     const tasks = useSelector(state => state.tasks);
+    const loading = useSelector(state => state.loading);
 
     useEffect(() => {
         dispatch(getTasks());
@@ -33,6 +38,9 @@ const ToDo = () => {
 
     return (
         <div className={classes.root}>
+            <Backdrop className={classes.backdrop} open={loading}>
+                <CircularProgress color="inherit" />
+            </Backdrop>
             <Grid container direction="column" spacing={2}>
                 {Object.keys(tasks).map(key => (
                     <Grid item key={key}>
