@@ -13,6 +13,9 @@ import {
     GET_TASKS_REQUEST,
     GET_TASKS_SUCCESS,
     SET_TASK_DONE,
+    REMOVE_TASK_REQUEST,
+    REMOVE_TASK_FAILURE,
+    REMOVE_TASK_SUCCESS,
 }
     from "./actions";
 
@@ -62,6 +65,12 @@ const reducer = (state = initialState, action) => {
                     }
                 }
             };
+        case REMOVE_TASK_REQUEST:
+            return {...state, loading: true};
+        case REMOVE_TASK_SUCCESS:
+            return {...state, loading: false, error: null};
+        case REMOVE_TASK_FAILURE:
+            return {...state, loading: false, error: action.payload};
         default:
             return state;
     }

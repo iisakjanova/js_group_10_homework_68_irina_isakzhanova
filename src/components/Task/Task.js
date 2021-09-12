@@ -1,5 +1,6 @@
+import {Checkbox, Grid, IconButton, makeStyles, Paper} from "@material-ui/core";
+import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import './Task.css';
-import {Checkbox, Grid, makeStyles, Paper} from "@material-ui/core";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -10,6 +11,9 @@ const useStyles = makeStyles(theme => ({
         paddingRight: theme.spacing(2),
         margin: 0,
         alignSelf: "center",
+    },
+    deleteBtn: {
+        marginLeft: "auto",
     },
 }));
 
@@ -30,6 +34,9 @@ const Task = props => {
                     checked={props.done}
                 />
                 <p className={labelClassNames}>{props.text}</p>
+                <IconButton className={classes.deleteBtn} onClick={props.onRemove}>
+                    <DeleteForeverIcon/>
+                </IconButton>
             </Grid>
         </Paper>
     );

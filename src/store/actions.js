@@ -19,6 +19,10 @@ export const GET_TASKS_FAILURE = 'GET_TASKS_FAILURE';
 
 export const SET_TASK_DONE = 'SET_TASK_DONE';
 
+export const REMOVE_TASK_REQUEST = 'REMOVE_TASK_REQUEST';
+export const REMOVE_TASK_SUCCESS = 'REMOVE_TASK_SUCCESS';
+export const REMOVE_TASK_FAILURE = 'REMOVE_TASK_FAILURE';
+
 export const increase = () => ({type: INCREASE});
 export const add = value => ({type: ADD, payload: value});
 export const decrease = () => ({type: DECREASE});
@@ -37,6 +41,10 @@ export  const getTasksSuccess = tasks => ({type: GET_TASKS_SUCCESS, payload: tas
 export  const getTasksFailure = () => ({type: GET_TASKS_FAILURE});
 
 export const setTaskDone = id => ({type: SET_TASK_DONE, payload: id});
+
+export const removeTaskRequest = id => ({type: REMOVE_TASK_REQUEST, payload: id});
+export const removeTaskSuccess = () => ({type: REMOVE_TASK_SUCCESS});
+export const removeTaskFailure = () => ({type: REMOVE_TASK_FAILURE});
 
 export const fetchCounter = () => {
     return async (dispatch) => {
@@ -84,6 +92,19 @@ export const getTasks = () => {
             }
         } catch (e) {
             dispatch(getTasksFailure());
+        }
+    };
+};
+
+export const removeTask = (id) => {
+    return async (dispatch) => {
+        dispatch(removeTaskRequest(id));
+
+        try {
+            await axiosApi.delete('/tasks/' + id + '.json');
+            dispatch(removeTaskSuccess());
+        } catch (e) {
+            dispatch(removeTaskFailure());
         }
     };
 };
