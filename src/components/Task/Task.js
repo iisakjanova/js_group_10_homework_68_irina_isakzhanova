@@ -1,5 +1,5 @@
 import './Task.css';
-import {Grid, makeStyles, Paper} from "@material-ui/core";
+import {Checkbox, Grid, makeStyles, Paper} from "@material-ui/core";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -9,6 +9,7 @@ const useStyles = makeStyles(theme => ({
         paddingLeft: theme.spacing(2),
         paddingRight: theme.spacing(2),
         margin: 0,
+        alignSelf: "center",
     },
 }));
 
@@ -23,8 +24,9 @@ const Task = props => {
     return (
         <Paper className={classes.root}>
             <Grid container direction="row">
-                <input
+                <Checkbox
                     type="checkbox"
+                    onChange={props.onCheck}
                     checked={props.done}
                 />
                 <p className={labelClassNames}>{props.text}</p>

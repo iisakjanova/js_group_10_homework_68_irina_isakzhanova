@@ -3,7 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {Grid, makeStyles} from "@material-ui/core";
 
 import Task from "../../components/Task/Task";
-import {getTasks} from "../../store/actions";
+import {getTasks, setTaskDone} from "../../store/actions";
 import './ToDo.css';
 
 const useStyles = makeStyles(theme => ({
@@ -22,6 +22,10 @@ const ToDo = () => {
         dispatch(getTasks());
     }, [dispatch]);
 
+    const handleCheckTask = id => {
+        dispatch(setTaskDone(id));
+    };
+
     return (
         <div className={classes.root}>
             <Grid container direction="column" spacing={2}>
@@ -30,6 +34,7 @@ const ToDo = () => {
                         <Task
                             text={tasks[key].text}
                             done={tasks[key].done}
+                            onCheck={() => handleCheckTask(key)}
                         />
                     </Grid>
                 ))}

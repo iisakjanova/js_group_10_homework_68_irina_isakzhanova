@@ -17,6 +17,7 @@ export const GET_TASKS_REQUEST = 'GET_TASKS_REQUEST';
 export const GET_TASKS_SUCCESS = 'GET_TASKS_SUCCESS';
 export const GET_TASKS_FAILURE = 'GET_TASKS_FAILURE';
 
+export const SET_TASK_DONE = 'SET_TASK_DONE';
 
 export const increase = () => ({type: INCREASE});
 export const add = value => ({type: ADD, payload: value});
@@ -34,6 +35,8 @@ export  const saveCounterFailure = () => ({type: SAVE_COUNTER_FAILURE});
 export  const getTasksRequest = () => ({type: GET_TASKS_REQUEST});
 export  const getTasksSuccess = tasks => ({type: GET_TASKS_SUCCESS, payload: tasks});
 export  const getTasksFailure = () => ({type: GET_TASKS_FAILURE});
+
+export const setTaskDone = id => ({type: SET_TASK_DONE, payload: id});
 
 export const fetchCounter = () => {
     return async (dispatch) => {

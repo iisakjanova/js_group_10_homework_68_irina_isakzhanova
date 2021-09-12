@@ -12,8 +12,9 @@ import {
     GET_TASKS_FAILURE,
     GET_TASKS_REQUEST,
     GET_TASKS_SUCCESS,
+    SET_TASK_DONE,
 }
-from "./actions";
+    from "./actions";
 
 const initialState = {
     counter: 0,
@@ -50,6 +51,17 @@ const reducer = (state = initialState, action) => {
             return {...state, loading: false, error: null, tasks: action.payload};
         case GET_TASKS_FAILURE:
             return {...state, loading: false, error: action.payload};
+        case SET_TASK_DONE:
+            return {
+                ...state,
+                tasks: {
+                    ...state.tasks,
+                    [action.payload]: {
+                        ...state.tasks[action.payload],
+                        done: !state.tasks[action.payload].done
+                    }
+                }
+            };
         default:
             return state;
     }

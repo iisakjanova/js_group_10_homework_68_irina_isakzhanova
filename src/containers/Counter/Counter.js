@@ -25,7 +25,8 @@ const Counter = () => {
     const classes = useStyles();
 
     const dispatch = useDispatch();
-    const {counter, loading} = useSelector(state => state);
+    const counter = useSelector(state => state.counter);
+    const loading = useSelector(state => state.loading);
 
     useEffect(() => {
         dispatch(fetchCounter());
