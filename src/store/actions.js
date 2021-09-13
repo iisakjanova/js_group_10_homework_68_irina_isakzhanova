@@ -88,7 +88,12 @@ export const saveCounter = () => {
         dispatch(saveCounterRequest());
 
         try {
-            await axiosApi.put('/counter.json', currentCounter);
+            if (currentCounter === 0) {
+                await axiosApi.put('/counter.json', '0');
+            } else {
+                await axiosApi.put('/counter.json', currentCounter);
+            }
+
             dispatch(saveCounterSuccess());
         } catch (e) {
             dispatch(saveCounterFailure());

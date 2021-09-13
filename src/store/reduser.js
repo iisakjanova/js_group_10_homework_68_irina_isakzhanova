@@ -20,7 +20,8 @@ import {
     SAVE_TASK_REQUEST,
     SAVE_TASK_SUCCESS,
     SAVE_TASK_FAILURE,
-    CLEAR_CURRENT_TASK, ADD_TASK_ERROR,
+    CLEAR_CURRENT_TASK,
+    ADD_TASK_ERROR,
 }
     from "./actions";
 
