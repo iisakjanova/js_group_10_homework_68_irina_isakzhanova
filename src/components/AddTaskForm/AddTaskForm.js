@@ -5,11 +5,11 @@ const useStyles = makeStyles(theme => ({
         padding: theme.spacing(2),
     },
     inputBlock: {
-        flexGrow: 1
+        flexGrow: 1,
     },
     addBtn: {
         marginLeft: '10px',
-        alignSelf: 'center'
+        alignSelf: 'center',
     },
     errorText: {
         color: 'red',

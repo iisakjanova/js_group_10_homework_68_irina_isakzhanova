@@ -3,7 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {Backdrop, CircularProgress, Grid, makeStyles} from "@material-ui/core";
 
 import Task from "../../components/Task/Task";
-import {addCurrentTask, getTasks, removeTask, saveTask, setTaskDone} from "../../store/actions";
+import {addCurrentTask, getTasks, removeTask, saveDoneTask, saveTask, setTaskDone} from "../../store/actions";
 import AddTaskForm from "../../components/AddTaskForm/AddTaskForm";
 
 const useStyles = makeStyles(theme => ({
@@ -40,6 +40,7 @@ const ToDo = () => {
 
     const handleCheckTask = id => {
         dispatch(setTaskDone(id));
+        dispatch(saveDoneTask(id));
     };
 
     const handleRemoveTask = async id => {

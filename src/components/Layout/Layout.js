@@ -11,7 +11,7 @@ const useStyles = makeStyles(theme => ({
         '& a': {
             color: 'inherit',
             textDecoration: 'none',
-        }
+        },
     },
     appBar: {
         zIndex: theme.zIndex.drawer + 1,

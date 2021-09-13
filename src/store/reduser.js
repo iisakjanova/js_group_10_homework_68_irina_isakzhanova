@@ -22,6 +22,9 @@ import {
     SAVE_TASK_FAILURE,
     CLEAR_CURRENT_TASK,
     ADD_TASK_ERROR,
+    EDIT_TASK_REQUEST,
+    EDIT_TASK_SUCCESS,
+    EDIT_TASK_FAILURE,
 }
     from "./actions";
 
@@ -84,6 +87,12 @@ const reducer = (state = initialState, action) => {
                     }
                 }
             };
+        case EDIT_TASK_REQUEST:
+            return {...state, loading: true};
+        case EDIT_TASK_SUCCESS:
+            return {...state, loading: false, error: null};
+        case EDIT_TASK_FAILURE:
+            return {...state, loading: false, error: action.payload};
         case REMOVE_TASK_REQUEST:
             return {...state, loading: true};
         case REMOVE_TASK_SUCCESS:

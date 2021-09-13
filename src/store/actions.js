@@ -27,6 +27,9 @@ export const GET_TASKS_SUCCESS = 'GET_TASKS_SUCCESS';
 export const GET_TASKS_FAILURE = 'GET_TASKS_FAILURE';
 
 export const SET_TASK_DONE = 'SET_TASK_DONE';
+export const EDIT_TASK_REQUEST = 'EDIT_TASK_REQUEST';
+export const EDIT_TASK_SUCCESS = 'EDIT_TASK_SUCCESS';
+export const EDIT_TASK_FAILURE = 'EDIT_TASK_FAILURE';
 
 export const REMOVE_TASK_REQUEST = 'REMOVE_TASK_REQUEST';
 export const REMOVE_TASK_SUCCESS = 'REMOVE_TASK_SUCCESS';
@@ -59,6 +62,9 @@ export  const getTasksSuccess = tasks => ({type: GET_TASKS_SUCCESS, payload: tas
 export  const getTasksFailure = () => ({type: GET_TASKS_FAILURE});
 
 export const setTaskDone = id => ({type: SET_TASK_DONE, payload: id});
+export const editTaskRequest = id => ({type: EDIT_TASK_REQUEST, payload: id});
+export const editTaskSuccess = () => ({type: EDIT_TASK_SUCCESS});
+export const editTaskFailure = () => ({type: EDIT_TASK_FAILURE});
 
 export const removeTaskRequest = id => ({type: REMOVE_TASK_REQUEST, payload: id});
 export const removeTaskSuccess = () => ({type: REMOVE_TASK_SUCCESS});
@@ -137,6 +143,20 @@ export const getTasks = () => {
             }
         } catch (e) {
             dispatch(getTasksFailure());
+        }
+    };
+};
+
+export const saveDoneTask = (id) => {
+    return async (dispatch, getState) => {
+        const task = getState().tasks[id]
+        dispatch(editTaskRequest(id));
+
+        try {
+            await axiosApi.put('/tasks/' + id + '.json', task);
+            dispatch(editTaskSuccess());
+        } catch (e) {
+            dispatch(editTaskFailure());
         }
     };
 };

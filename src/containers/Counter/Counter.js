@@ -58,10 +58,34 @@ const Counter = () => {
                 <CircularProgress color="inherit" />
             </Backdrop>
             <Typography variant="h2" className={classes.number}>{counter}</Typography>
-            <Button variant="contained" onClick={handleIncrease} className={classes.button}>Increase</Button>
-            <Button variant="contained" onClick={handleDecrease} className={classes.button}>Decrease</Button>
-            <Button variant="contained" onClick={handleAdd} className={classes.button}>Increase by 5</Button>
-            <Button variant="contained" onClick={handleSubtract} className={classes.button}>Decrease by 5</Button>
+            <Button
+                variant="contained"
+                onClick={handleIncrease}
+                className={classes.button}
+            >
+                Increase
+            </Button>
+            <Button
+                variant="contained"
+                onClick={handleDecrease}
+                className={classes.button}
+            >
+                Decrease
+            </Button>
+            <Button
+                variant="contained"
+                onClick={handleAdd}
+                className={classes.button}
+            >
+                Increase by 5
+            </Button>
+            <Button
+                variant="contained"
+                onClick={handleSubtract}
+                className={classes.button}
+            >
+                Decrease by 5
+            </Button>
         </div>
     );
 };
