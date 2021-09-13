@@ -13,6 +13,15 @@ export const SAVE_COUNTER_REQUEST = 'SAVE_COUNTER_REQUEST';
 export const SAVE_COUNTER_SUCCESS = 'SAVE_COUNTER_SUCCESS';
 export const SAVE_COUNTER_FAILURE = 'SAVE_COUNTER_FAILURE';
 
+export const ADD_CURRENT_TASK = 'ADD_CURRENT_TASK';
+export const CLEAR_CURRENT_TASK = 'CLEAR_CURRENT_TASK';
+
+export const ADD_TASK_ERROR = 'ADD_TASK_ERROR';
+
+export const SAVE_TASK_REQUEST = 'SAVE_TASK_REQUEST';
+export const SAVE_TASK_SUCCESS = 'SAVE_TASK_SUCCESS';
+export const SAVE_TASK_FAILURE = 'SAVE_TASK_FAILURE';
+
 export const GET_TASKS_REQUEST = 'GET_TASKS_REQUEST';
 export const GET_TASKS_SUCCESS = 'GET_TASKS_SUCCESS';
 export const GET_TASKS_FAILURE = 'GET_TASKS_FAILURE';
@@ -35,6 +44,15 @@ export  const fetchCounterFailure = () => ({type: FETCH_COUNTER_FAILURE});
 export  const saveCounterRequest = () => ({type: SAVE_COUNTER_REQUEST});
 export  const saveCounterSuccess = () => ({type: SAVE_COUNTER_SUCCESS});
 export  const saveCounterFailure = () => ({type: SAVE_COUNTER_FAILURE});
+
+export const addCurrentTask = text => ({type: ADD_CURRENT_TASK, payload: text});
+export const clearCurrentTask = () => ({type: CLEAR_CURRENT_TASK});
+
+export const setAddTaskError = error => ({type: ADD_TASK_ERROR, payload: error});
+
+export  const saveTaskRequest = () => ({type: SAVE_TASK_REQUEST});
+export  const saveTaskSuccess = task => ({type: SAVE_TASK_SUCCESS, payload: task});
+export  const saveTaskFailure = () => ({type: SAVE_TASK_FAILURE});
 
 export  const getTasksRequest = () => ({type: GET_TASKS_REQUEST});
 export  const getTasksSuccess = tasks => ({type: GET_TASKS_SUCCESS, payload: tasks});
@@ -74,6 +92,28 @@ export const saveCounter = () => {
             dispatch(saveCounterSuccess());
         } catch (e) {
             dispatch(saveCounterFailure());
+        }
+    };
+};
+
+export const saveTask = () => {
+    return async (dispatch, getState) => {
+        const currentTask = getState().currentTask;
+
+        if (currentTask) {
+            dispatch(saveTaskRequest());
+
+            try {
+                await axiosApi.post('/tasks.json', {text: currentTask, done: false});
+                dispatch(saveTaskSuccess());
+                dispatch(setAddTaskError(''));
+                dispatch(getTasks());
+                dispatch(clearCurrentTask());
+            } catch (e) {
+                dispatch(saveTaskFailure());
+            }
+        } else {
+            dispatch(setAddTaskError('* Enter a task'));
         }
     };
 };

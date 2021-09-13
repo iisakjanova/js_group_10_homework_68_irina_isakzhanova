@@ -16,6 +16,11 @@ import {
     REMOVE_TASK_REQUEST,
     REMOVE_TASK_FAILURE,
     REMOVE_TASK_SUCCESS,
+    ADD_CURRENT_TASK,
+    SAVE_TASK_REQUEST,
+    SAVE_TASK_SUCCESS,
+    SAVE_TASK_FAILURE,
+    CLEAR_CURRENT_TASK, ADD_TASK_ERROR,
 }
     from "./actions";
 
@@ -23,7 +28,8 @@ const initialState = {
     counter: 0,
     loading: false,
     tasks: {},
-    currentTask: ''
+    currentTask: '',
+    addTaskError: '',
 };
 
 const reducer = (state = initialState, action) => {
@@ -47,6 +53,18 @@ const reducer = (state = initialState, action) => {
         case SAVE_COUNTER_SUCCESS:
             return {...state, loading: false, error: null};
         case SAVE_COUNTER_FAILURE:
+            return {...state, loading: false, error: action.payload};
+        case ADD_CURRENT_TASK:
+            return {...state, currentTask: action.payload};
+        case ADD_TASK_ERROR:
+            return {...state, addTaskError: action.payload};
+        case CLEAR_CURRENT_TASK:
+            return {...state, currentTask: ''};
+        case SAVE_TASK_REQUEST:
+            return {...state, loading: true};
+        case SAVE_TASK_SUCCESS:
+            return {...state, loading: false, error: null};
+        case SAVE_TASK_FAILURE:
             return {...state, loading: false, error: action.payload};
         case GET_TASKS_REQUEST:
             return {...state, loading: true};

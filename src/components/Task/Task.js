@@ -1,6 +1,5 @@
 import {Checkbox, Grid, IconButton, makeStyles, Paper} from "@material-ui/core";
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
-import './Task.css';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -12,6 +11,9 @@ const useStyles = makeStyles(theme => ({
         margin: 0,
         alignSelf: "center",
     },
+    crossed: {
+        textDecoration: 'line-through',
+    },
     deleteBtn: {
         marginLeft: "auto",
     },
@@ -22,7 +24,7 @@ const Task = props => {
     let labelClassNames = classes.text;
 
     if (props.done) {
-        labelClassNames += ' crossed';
+        labelClassNames += ' ' + classes.crossed;
     }
 
     return (
